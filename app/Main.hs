@@ -17,7 +17,8 @@ mermaidFilter (CodeBlock (_ident, classes, _kvs) content)
       n <- get
       put (succ n)
       let out = "figure-"<>show n<>".svg"
-      _ <- liftIO $ readProcess "mermaid-cli" ["-i", "-", "-o", out] (T.unpack content)
+      -- from mermaid-cli
+      _ <- liftIO $ readProcess "mmdc" ["-i", "-", "-o", out] (T.unpack content)
       return $ Plain [Image nullAttr [] (T.pack out, "")]
 mermaidFilter blk = return blk
 
