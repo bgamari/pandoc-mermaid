@@ -12,8 +12,8 @@ main :: IO ()
 main = evalStateT (toJSONFilter mermaidFilter) (0 :: Int)
 
 mermaidFilter :: Block -> StateT Int IO Block
-mermaidFilter (CodeBlock (ident, classes, kvs) content)
-  | ident == "mermaid" = do
+mermaidFilter (CodeBlock (_ident, classes, _kvs) content)
+  | "mermaid":_ <- classes = do
       n <- get
       put (succ n)
       let out = "figure-"<>show n<>".svg"
