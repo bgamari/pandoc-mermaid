@@ -1,4 +1,4 @@
-# Revision history for mermaid-filter
+# Revision history for pandoc-mermaid
 
 ## 0.1.0.0 -- YYYY-mm-dd
 
