@@ -16,9 +16,11 @@ mermaidFilter (CodeBlock (_ident, classes, _kvs) content)
   | "mermaid":_ <- classes = do
       n <- get
       put (succ n)
-      let out = "figure-"<>show n<>".svg"
+      let format = "pdf"
+      let out = "figure-"<>show n<>"."<>format
       -- from mermaid-cli
-      _ <- liftIO $ readProcess "mmdc" ["-i", "-", "-o", out] (T.unpack content)
+      let args = ["-i", "-", "--outputFormat", format, "-o", out]
+      _ <- liftIO $ readProcess "mmdc" args (T.unpack content)
       return $ Plain [Image nullAttr [] (T.pack out, "")]
 mermaidFilter blk = return blk
 
