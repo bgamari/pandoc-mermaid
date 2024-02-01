@@ -19,7 +19,7 @@ mermaidFilter (CodeBlock (_ident, classes, _kvs) content)
       let format = "pdf"
       let out = "figure-"<>show n<>"."<>format
       -- from mermaid-cli
-      let args = ["-i", "-", "--outputFormat", format, "-o", out]
+      let args = ["-i", "-", "--outputFormat", format, "--pdfFit", "-o", out]
       _ <- liftIO $ readProcess "mmdc" args (T.unpack content)
       return $ Plain [Image nullAttr [] (T.pack out, "")]
 mermaidFilter blk = return blk
